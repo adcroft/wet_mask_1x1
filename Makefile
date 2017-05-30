@@ -9,7 +9,7 @@ FRE-NCtools:
 FRE-NCtools/build.mk FRE-NCtools/env.sh: | FRE-NCtools
 	cd $(@D) && cp site-configs/gfdl/$(@F) .
 FRE-NCtools/tools/fregrid/fregrid: FRE-NCtools/build.mk FRE-NCtools/env.sh
-	cd $(@D) && . ../../env.sh && make
+	cd $(@D) && . ../../env.sh && make fregrid
 
 # Copy mosaic files to here
 ocean_mosaic.nc ocean_hgrid.nc:
@@ -24,3 +24,9 @@ tmp_wet.nc: FRE-NCtools/tools/fregrid/fregrid ocean_mosaic.nc ocean_hgrid.nc oce
 # Create a new mask for 1x1 grid
 wet_mask_1x1.nc: tmp_wet.nc Makefile new_mask.py
 	python new_mask.py
+
+# Download 0.5 degree grid and mask
+OM4_0.5deg_grid_mask.tgz:
+	wget -O $@ ftp://ftp.gfdl.noaa.gov/pub/aja/$@
+get_files: OM4_0.5deg_grid_mask.tgz
+	tar zvxf $^

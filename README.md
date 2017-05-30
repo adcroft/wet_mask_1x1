@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/adcroft/wet_mask_1x1.svg?branch=master)](https://travis-ci.org/adcroft/wet_mask_1x1)
+
 ## wet_mask_1x1
 
 These scripts generate a wet-mask for the 1x1 degree grid used for distributing re-gridded ocean model output.

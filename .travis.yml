@@ -1,0 +1,29 @@
+language: python
+dist: trusty
+sudo: false
+
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - pkg-config netcdf-bin libnetcdf-dev libhdf5-dev
+
+python:
+  - "2.7"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+
+install:
+  - pip install --upgrade pip
+  - pip install netcdf4
+
+before_script:
+  - make get_files
+
+script:
+  - make FRE-NCtools
+  - echo '' > FRE-NCtools/build.mk
+  - echo '' > FRE-NCtools/env.sh
+  - make CC=gcc CFLAGS='-O2' CFLAGS_O2='-O2' LDFLAGS='-lm'
